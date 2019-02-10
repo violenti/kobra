@@ -11,9 +11,9 @@ filedns=''
 resolver = dns.resolver.Resolver()
 #resolver.nameservers=[socket.gethostbyname('8.8.8.8')]
 
-def finddns(nameservers):
+def finddns(nameservers, domain):
     for data in nameservers :
-        print (data)
+        print (domain,"",data)
 
 with open(filedns,encoding='utf-8') as f:
     for line in f:
@@ -22,9 +22,9 @@ with open(filedns,encoding='utf-8') as f:
         #nameservers = dns.resolver.query(domain, 'A')
         try:
             nameservers = dns.resolver.query(domain, 'A')
-            finddns(nameservers)
+            finddns(nameservers,domain)
         except dns.exception.DNSException as e:
-            print ("not register")
+            print (domain,"","not register")
             #log.info("instance not found: {}".format(repr(e)))
 
 # for rdata in resolver.query('moni.com.ar', 'A'):
