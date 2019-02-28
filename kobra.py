@@ -15,17 +15,30 @@ def parse_args():
     # parse the arguments
     parser = argparse.ArgumentParser(epilog='\tExample: \r\npython ' + sys.argv[0] + " -i mydomain.txt")
     parser._optionals.title = "OPTIONS"
-    parser.add_argument('-i', '--input', help="file from will your list with domain", required=True)
+    parser.add_argument('-i', '--input', help="file from will your list with domain",type=str, required=True)
+    parser.add_argument('-o', '--output', help="file when writing the output",type=str,required=False)
 
     return parser.parse_args()
 
+args = parse_args()
+
 def finddns(nameservers, domain):
-    for data in nameservers :
-        print (domain,"",data)
+    output = args.output
+    if output is None :
+        for data in nameservers :
+          print (domain,"",data)
+    else:
+        for data in nameservers:
+           with open(output,"w",encoding='utf-8') as out:
+               out.write('%s '%domain)
+               out.write('%s'%"")
+               out.write('%s \n'%data)
+
 
 def main():
-    args = parse_args()
+    #args = parse_args()
     filedns = args.input
+    output = args.output
     with open(filedns,encoding='utf-8') as f:
        for line in f:
           domain= line.strip()
