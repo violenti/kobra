@@ -8,9 +8,7 @@ import time
 import argparse
 import sys
 
-#filedns='moni.txt'
 resolver = dns.resolver.Resolver()
-#resolver.nameservers=[socket.gethostbyname('8.8.8.8')]
 
 ##function for arguments
 def parse_args():
@@ -32,13 +30,11 @@ def main():
        for line in f:
           domain= line.strip()
           time.sleep(3)
-          #nameservers = dns.resolver.query(domain, 'A')
           try:
             nameservers = dns.resolver.query(domain, 'A')
             finddns(nameservers,domain)
           except dns.exception.DNSException as e:
                print (domain,"","not register")
-            #log.info("instance not found: {}".format(repr(e)))
 
 if __name__ == '__main__':
     main()
