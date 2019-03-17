@@ -7,6 +7,7 @@ import dns.exception
 import time
 import argparse
 import sys
+import csv
 
 resolver = dns.resolver.Resolver()
 
@@ -23,20 +24,21 @@ def parse_args():
 args = parse_args()
 
 def finddns(nameservers, domain):
-    output = args.output
-    if output is None :
-        for data in nameservers :
-          print (domain,"",data)
-    else:
-        for data in nameservers:
-           with open(output,"w",encoding='utf-8') as out:
-               out.write('%s '%domain)
-               out.write('%s'%"")
-               out.write('%s \n'%data)
+    for data in nameservers :
+        print (domain,"",data)
+
+def finddnsoutput(nameservers, domain): ## I need creating a csv from string array
+    information=[nameservers,domain]
+    with open('peak.csv', 'w') as csvFile:
+        fields = ['mountain', 'height']
+        writer = csv.DictWriter(csvFile, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(information)
+    csvFile.close()
+
 
 
 def main():
-    #args = parse_args()
     filedns = args.input
     output = args.output
     with open(filedns,encoding='utf-8') as f:
@@ -45,9 +47,14 @@ def main():
           time.sleep(3)
           try:
             nameservers = dns.resolver.query(domain, 'A')
-            finddns(nameservers,domain)
           except dns.exception.DNSException as e:
                print (domain,"","not register")
+          if output is None:
+              finddns(nameservers,domain)
+
+          else:
+              finddnsoutput(nameservers,domain)
+
 
 if __name__ == '__main__':
     main()
