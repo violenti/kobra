@@ -1,11 +1,20 @@
-# Kobra is a simple DNS lookup
+# Kobra is a simple tool for find register dns of type A
 
 
-Only need python 3 and run pip -r requeriments.txt
 
-## USE
-Create a file with domains that like know the register type A. Put your file with domains using argument -i or --input .
+Only need python 3 and run `pip -r requeriments.txt`
 
-For example `python3 kobra.py -i mydomains.txt`
+## USAGE
 
-You can get a file domains with subdomains if use [Sublist3r](https://github.com/aboul3la/Sublist3r)
+
+Short Form    | Long Form     | Description
+------------- | ------------- |-------------
+-i            | --input      | file from will your list with domain
+-r            | --resolver  | dns name for resolver
+
+Create a file with domains that like know the register type A.
+
+You can get a file domains with your subdomains if use [Sublist3r](https://github.com/aboul3la/Sublist3r)
+
+
+[LICENSE] (https://github.com/violenti/kobra/blob/master/LICENSE)
