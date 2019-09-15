@@ -16,5 +16,6 @@ Create a file with domains that like know the register type A.
 
 You can get a file domains with your subdomains if use [Sublist3r](https://github.com/aboul3la/Sublist3r)
 
+## LICENSE
 
 [LICENSE] (https://github.com/violenti/kobra/blob/master/LICENSE)
