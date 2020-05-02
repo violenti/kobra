@@ -27,7 +27,6 @@ def parse_args():
     parser = argparse.ArgumentParser(epilog='\tExample: \r\npython ' + sys.argv[0] + " -i mydomain.txt")
     parser._optionals.title = "OPTIONS"
     parser.add_argument('-i', '--input', help="file from will your list with domain",type=str, required=True)
-    #parser.add_argument('-o', '--output', help="file when writing the output",type=str,required=False)
     parser.add_argument('-r','--resolver',help="dns name for resolver, for example 8.8.8.8", type=str, required=False)
     parser.add_argument('-t','--type',help="type of dns record for finding", type=str,required=False)
     return parser.parse_args()
