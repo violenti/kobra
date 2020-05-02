@@ -16,6 +16,7 @@ print (r"""
  | |/ / _ \| '_ \| '__/ _` |
  |   < (_) | |_) | | | (_| |
  |_|\_\___/|_.__/|_|  \__,_|
+
   by @violenti https://github.com/violenti/kobra
   LICENSE MIT
      """)
@@ -26,7 +27,6 @@ def parse_args():
     parser = argparse.ArgumentParser(epilog='\tExample: \r\npython ' + sys.argv[0] + " -i mydomain.txt")
     parser._optionals.title = "OPTIONS"
     parser.add_argument('-i', '--input', help="file from will your list with domain",type=str, required=True)
-    parser.add_argument('-o', '--output', help="file when writing the output",type=str,required=False)
     parser.add_argument('-r','--resolver',help="dns name for resolver, for example 8.8.8.8", type=str, required=False)
     return parser.parse_args()
 
@@ -39,7 +39,6 @@ def finddns(nameservers, domain):
 
 def main():
     filedns = args.input
-    output = args.output
     resolverdns = args.resolver
     with open(filedns,encoding='utf-8') as f:
        for line in f:
@@ -58,11 +57,9 @@ def main():
               except dns.exception.DNSException as e:
                    print (domain,"","not register")
 
-          if output is None:
-              finddns(nameservers,domain)
 
-          else:
-              finddnsoutput(domain,nameservers,output)
+          finddns(nameservers,domain)
+
 
 
 if __name__ == '__main__':
