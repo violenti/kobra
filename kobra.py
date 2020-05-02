@@ -26,8 +26,9 @@ def parse_args():
     parser = argparse.ArgumentParser(epilog='\tExample: \r\npython ' + sys.argv[0] + " -i mydomain.txt")
     parser._optionals.title = "OPTIONS"
     parser.add_argument('-i', '--input', help="file from will your list with domain",type=str, required=True)
-    parser.add_argument('-o', '--output', help="file when writing the output",type=str,required=False)
+    #parser.add_argument('-o', '--output', help="file when writing the output",type=str,required=False)
     parser.add_argument('-r','--resolver',help="dns name for resolver, for example 8.8.8.8", type=str, required=False)
+    parser.add_argument('-t','--type',help="type of dns record for finding", type=str,required=False)
     return parser.parse_args()
 
 args = parse_args()
@@ -37,32 +38,31 @@ def finddns(nameservers, domain):
     for data in nameservers :
         print (domain,"",data)
 
-def main():
-    filedns = args.input
-    output = args.output
-    resolverdns = args.resolver
+
+def main(): #va a recibir un tipo de records y un dns
+    filedns = args.input # tiene que tener
+    #output = args.output # no es necesario
+    resolverdns = args.resolver # es necesario
+    typerecords = args.type # es necesario
+    nameservers= ''
     with open(filedns,encoding='utf-8') as f:
        for line in f:
           domain= line.strip()
           time.sleep(3)
           if resolverdns is None:
            try:
-             nameservers = dns.resolver.query(domain, 'A')
+             nameservers = dns.resolver.query(domain, typerecords)
            except dns.exception.DNSException as e:
                print (domain,"","not register")
           else:
               resolver=dns.resolver.Resolver(configure=False)
               resolver.nameservers = [resolverdns]
               try:
-                nameservers = dns.resolver.query(domain, 'A',)
+                nameservers = dns.resolver.query(domain,typerecords)
               except dns.exception.DNSException as e:
                    print (domain,"","not register")
 
-          if output is None:
-              finddns(nameservers,domain)
-
-          else:
-              finddnsoutput(domain,nameservers,output)
+          finddns(nameservers,domain)
 
 
 if __name__ == '__main__':
