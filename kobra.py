@@ -45,24 +45,29 @@ def main(): #va a recibir un tipo de records y un dns
     resolverdns = args.resolver # es necesario
     typerecords = args.type # es necesario
     nameservers= ''
-    with open(filedns,encoding='utf-8') as f:
-       for line in f:
-          domain= line.strip()
-          time.sleep(3)
-          if resolverdns is None:
-           try:
-             nameservers = dns.resolver.query(domain, typerecords)
-           except dns.exception.DNSException as e:
-               print (domain,"","not register")
-          else:
-              resolver=dns.resolver.Resolver(configure=False)
-              resolver.nameservers = [resolverdns]
-              try:
-                nameservers = dns.resolver.query(domain,typerecords)
-              except dns.exception.DNSException as e:
-                   print (domain,"","not register")
+    if typerecords is None:
+        print ("Please set the dns records")
+    else:
 
-          finddns(nameservers,domain)
+       with open(filedns,encoding='utf-8') as f:
+
+           for line in f:
+               domain= line.strip()
+               time.sleep(3)
+               if resolverdns is None:
+                   try:
+                     nameservers = dns.resolver.query(domain, typerecords)
+                   except dns.exception.DNSException as e:
+                       print (domain,"","not register")
+               else:
+                  resolver=dns.resolver.Resolver(configure=False)
+                  resolver.nameservers = [resolverdns]
+                  try:
+                      nameservers = dns.resolver.query(domain,typerecords)
+                  except dns.exception.DNSException as e:
+                      print (domain,"","not register")
+
+               finddns(nameservers,domain)
 
 
 if __name__ == '__main__':
