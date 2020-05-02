@@ -52,7 +52,6 @@ def main():
           else:
               resolver=dns.resolver.Resolver(configure=False)
               resolver.nameservers = [resolverdns]
-              print (resolver.nameservers)
               try:
                 nameservers = dns.resolver.query(domain, 'A',)
               except dns.exception.DNSException as e:
