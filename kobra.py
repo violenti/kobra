@@ -9,6 +9,16 @@ import argparse
 import sys
 
 resolver = dns.resolver.Resolver()
+print (r"""
+  _         _
+ | |       | |
+ | | _____ | |__  _ __ __ _
+ | |/ / _ \| '_ \| '__/ _` |
+ |   < (_) | |_) | | | (_| |
+ |_|\_\___/|_.__/|_|  \__,_|
+  by @violenti https://github.com/violenti/kobra
+  LICENSE MIT
+     """)
 
 ##function for arguments
 def parse_args():
