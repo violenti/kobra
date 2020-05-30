@@ -21,9 +21,8 @@ print (r"""
   LICENSE MIT
      """)
 
-##function for arguments
+
 def parse_args():
-    # parse the arguments
     parser = argparse.ArgumentParser(epilog='\tExample: \r\npython ' + sys.argv[0] + " -i mydomain.txt")
     parser._optionals.title = "OPTIONS"
     parser.add_argument('-i', '--input', help="file from will your list with domain",type=str, required=True)
@@ -39,11 +38,11 @@ def finddns(nameservers, domain):
         print (domain,"",data)
 
 
-def main(): #va a recibir un tipo de records y un dns
-    filedns = args.input # tiene que tener
-    #output = args.output # no es necesario
-    resolverdns = args.resolver # es necesario
-    typerecords = args.type # es necesario
+def main():
+    filedns = args.input
+    #output = args.output
+    resolverdns = args.resolver
+    typerecords = args.type
     nameservers= ''
     if typerecords is None:
         print ("Please set the dns records")

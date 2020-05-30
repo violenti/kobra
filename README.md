@@ -2,7 +2,7 @@
 
 
 
-Only need python 3 and run `pip -r requeriments.txt`
+You just Python 3 and run `pip -r requeriments.txt`
 
 ## USAGE
 
