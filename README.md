@@ -2,7 +2,6 @@
 
 A simple tool for search DNS registers. 
 
-You just Python3 :snake: and pipenv
 
 ## Instalation
 
